@@ -1,6 +1,6 @@
 ## A quick look at COVID
 
-Firstly, I should mention my data sources. International data is taken from [JHU CSSE](https://github.com/CSSEGISandData/COVID-19.git), who has a nice [map and monitoring dashboard](https://coronavirus.jhu.edu/map.html). New Zealand data is taken directly from the [Ministry of Health](health.govt.nz). They keep changing their data format...
+Firstly, I should mention my data sources. International data is taken from [JHU CSSE](https://github.com/CSSEGISandData/COVID-19.git), who has a nice [map and monitoring dashboard](https://coronavirus.jhu.edu/map.html). New Zealand data is taken directly from the [Ministry of Health](https://www.health.govt.nz/our-work/diseases-and-conditions/covid-19-novel-coronavirus). They keep changing their data format...
 
 Secondly, and probably more importantly: Take care of yourself. Don't get stupid ideas from my silly graphs and panic, or lull yourself into a false sense of security. I take no responsibility for how these are used. I also apologise for not making everything more pretty / understandable. Maybe it will get there.
 
