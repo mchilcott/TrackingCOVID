@@ -29,18 +29,18 @@ The latter has a large number of cases of infection, and subsequently deaths, so
 
 ### The New Zealand Situation
 
-![NZ's new cases per day](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZ Model/NZCasesPerDay.png)
+![NZ's new cases per day](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZModel/NZCasesPerDay.png)
 
-![NZ's Total Cases, Linear Scale](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZ Model/NZCases.png)
+![NZ's Total Cases, Linear Scale](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZModel/NZCases.png)
 
-![NZ's Total Cases, Log Scale](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZ Model/NZCasesLog.png)
+![NZ's Total Cases, Log Scale](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZModel/NZCasesLog.png)
 
 Especially, consider this split up by District Health Board.
 
-![NZ's Total Cases, By DHB](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZ Model/NZByDHB.png)
+![NZ's Total Cases, By DHB](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZModel/NZByDHB.png)
 
 And taking into account how many people are actually serviced by that District Health Board
-![NZ's Total Cases, By DHB Per Capita](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZ Model/NZByDHBPerCap.png)
+![NZ's Total Cases, By DHB Per Capita](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZModel/NZByDHBPerCap.png)
 
 ### NZ vs The World
 In each of these graphs, New Zealand's state is shown in black. (GO THE BLACKS! Oh wait... no sport in a lock-down.)
