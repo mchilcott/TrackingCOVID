@@ -21,6 +21,7 @@ If we allow for a 10% standard deviation for each of the infection parameters, a
 Consider also, that during a lock down, we are kept in small groups or "bubbles", who are each in close contact inside the group, but the groups are isolated from each other. To reduce the time we need to be locked down, we need the virus to die off quickly. This means:
  - Zero transmission and let people recover, or
  - Quick transmission so that the virus is unable to spread quickly, because most people have it. (Herd immunity)
+
 The latter has a large number of cases of infection, and subsequently deaths, so let's not do this to the entire population. Locking down hopefully (nearly) eliminates transmission between our bubbles. The somewhat controversial part - we then also kinda want fast transmission inside the bubble - ideally, we want to isolate any sick people, but if people sharing a bubble are going to get it anyway, the sooner the better so bubbles recover (and become no longer infectious to the larger population) faster. A quick look at this process, only taking into account the fact that a sick member of a bubble means a larger starting fraction of the virus can be seen in the following figure. The bold line is for a bubble of four people.
 
 ![Bubble SIRD run](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/Simulations/SmallBubble.png)
@@ -39,7 +40,7 @@ Especially, consider this split up by District Health Board.
 
 ![NZ's Total Cases, By DHB](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZModel/NZByDHB.png)
 
-And taking into account how many people are actually serviced by that District Health Board
+And taking into account how many people are actually serviced by that District Health Board, we see that the Southern district has an unfair share of the number of cases.
 ![NZ's Total Cases, By DHB Per Capita](https://raw.githubusercontent.com/mchilcott/TrackingCOVID/master/NZModel/NZByDHBPerCap.png)
 
 ### NZ vs The World
