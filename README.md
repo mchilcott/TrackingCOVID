@@ -16,24 +16,24 @@ Let $$s, i, r, d$$ be the susceptible, infected, recovered, and dead fraction of
 
 #### Decay of the Susceptible
 
-$$ \frac{\text{d}s}{\text{d}t} = - \beta s(t) i(t) $$
+$$ \frac{\text{d}s}{\text{d}t} = - \beta\ s(t)\ i(t) $$
 
-The susceptible become infected at a rate proportional to the product of the susceptible fraction, and the infected fraction: if $$i = 0$$ or $$s = 0$$, then there is no infection, and the larger $$s$$ or $$i$$ is, the more likely infection is to occur. This is scaled by$$\beta$, which is a parameter governed by how easily transmissible the virus is, and (hopefully) effected by things like lock-down.
+The susceptible become infected at a rate proportional to the product of the susceptible fraction, and the infected fraction: if $$i = 0$$ or $$s = 0$$, then there is no infection, and the larger $$s$$ or $$i$$ is, the more likely infection is to occur. This is scaled by $$\beta$$, which is a parameter governed by how easily transmissible the virus is, and (hopefully) effected by things like lock-down.
 
 
 #### Growth of the Infected, and decay - recovery or death
 
 $$ \frac{\text{d}i}{\text{d}t} = \beta\ s(t)\ i(t) - \gamma\ i(t) - \delta\ i(t) $$
 
-The infected population increased due to the process described above, and decreases as infected people either recover (at a rate $$\gamma$$) or die (at rate $$\delta$$).
+The infected population increases due to the process described above, and decreases as infected people either recover (at a rate $$\gamma$$) or die (at rate $$\delta$$).
 
 The parameter $$\gamma$$ is approximately the inverse of the recovery time. People have estimated the recovery time from COVID-19 to be anywhere between 2 and 30 days, which isn't very useful, but most reports are around the two week mark, so for this model, we take $$\gamma = 1/14$$.
 
-The mortality rate (fraction of fatal infections) governs $$\delta$. The mortality rate is extremely hard to estimate, as one must know both the number of fatalities from the disease (which is generally easy to measure), and the total number of cases, which is much harder to measure. Not all infected people are tested, and are therefore not counted as having the disease. This is a mechanism by which is is easy to *overestimate* the mortality rate of the infection. The mortality rate is of course strongly effected by available medical care. Testing lots and testing early has two advantages:
+The mortality rate (fraction of fatal infections) governs $$\delta$$. The mortality rate is extremely hard to estimate, as one must know both the number of fatalities from the disease (which is generally easy to measure), and the total number of cases, which is much harder to measure. Not all infected people are tested, and are therefore not counted as having the disease. This is a mechanism by which it is easy to *overestimate* the mortality rate of the infection. The mortality rate is of course strongly effected by available medical care. Testing lots and testing early has two advantages:
  - You can prepare
    - by quarantining people who have no/little symptoms but can infect others to reduce overall infected population (reducing the $$\beta$$ parameter)
-   - get your medical care systems ready to deal with the symptomatic cases where it is needed resulting in (hopefully) fewer deaths.
- - Your country gets the benefit of reporting a low mortality rate, because you have have a better (larger) idea of how many people actually have the disease.
+   - by getting your medical care systems ready to deal with the symptomatic cases where it is needed -  resulting in (hopefully) fewer deaths.
+ - Your country gets the benefit of reporting a low mortality rate, because you have a better (larger) idea of how many people actually have the disease.
  
 The former is of course much less important for your population, but is interesting for the purpose of getting the best handle on the data.
 
@@ -58,7 +58,7 @@ The other interesting parameters to extract are:
  
  $$ T_c = \frac{1}{\beta}, $$
  
- - the time recovery time as discussed above,
+ - the recovery time as discussed above,
  
  $$ T_r = \frac{1}{\gamma} $$
  
@@ -89,11 +89,15 @@ The latter has a large number of cases of infection, and subsequently deaths, so
 
 Moving away from the simulations, we can take a look at some real data. Firstly, let's look at some summary statistics of New Zealand's data. Note that the numbers for the last day on these plots represent a less than 24 hour period, and are hence not representative.
 
+#### New Cases
+
 ![NZ's new cases per day](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/NZCasesPerDay.png)
 
 ![NZ's Total Cases, Linear Scale](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/NZCases.png)
 
 ![NZ's Total Cases, Log Scale](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/NZCasesLog.png)
+
+#### Regions
 
 Especially, consider this split up by District Health Board.
 
@@ -103,15 +107,25 @@ And taking into account how many people are actually serviced by that District H
 ![NZ's Total Cases, By DHB Per Capita](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/NZByDHBPerCap.png)
 
 ### NZ vs The World
-In each of these graphs, New Zealand's state is shown in black. (GO THE BLACKS! Oh wait... no sport in a lock-down.)
+In each of these graphs, New Zealand's state is shown in black. (GO THE ALL BLACKS! Oh wait... no sport in a lock-down.)
 
 ![International Cases, Log Scale](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/International/NZvsWorld.png)
 
-But more interestingly, consider our growth rate. Firstly, let's take a look at the trajectory we're taking compared to other countries since each hit 10 cases.
+Note that this is a log scale, so that we can see what's going on. On a linear plot, we see the small scale of our infection compared to the rest of the world. China is the early riser, and then the US, Italy and Spain surpass their reported case number, with the US in the lead for case number, and still sky-rocketing.
+
+![International Cases, from 10 cases](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/International/NZvsWorldLinear.png)
+
+#### Growth
+
+Consider our growth rate. Firstly, let's take a look at the trajectory we're taking compared to other countries since each hit 10 cases.
 
 ![International Cases, from 10 cases](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/International/Comparason.png)
 
-And finally, another check to see if we're getting away from exponential growth. The following figure shows the number of new cases over the previous week, against the total number of cases. This is a straight rising line for exponential growth (thinking back to a little calculus: the derivative of exp(x) is exp(x), so the rate of change of exponential growth is proportional to the exponential growth itself). What we really want to see is something other than a straight line going up. We want to see it go drastically down, to zero new cases.
+And finally, another check to see if we're getting away from exponential growth. The following figure shows the number of new cases over the previous week, against the total number of cases. This is a straight rising line for exponential growth.
+
+(thinking back to a little calculus: $$ \frac{\text{d}}{\text{d}x} e^x = e^x $$, so the rate of change of exponential growth is proportional to the exponential growth itself).
+
+What we really want to see is something other than a straight line going up. We want to see it drop drastically, to zero new cases. This graph is pessimistic however, as it uses the previous week of growth (to get a smooth curve), so there is some delay in showing the deviation from exponential growth.
 
 ![International Cases, from 10 cases](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/International/ExponentialGrowth.png)
 

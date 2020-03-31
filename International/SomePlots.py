@@ -33,7 +33,8 @@ plt.ylabel("Confirmed Cases")
 plt.xlabel("Date")
 plt.tight_layout()
 plt.savefig("NZvsWorld.png")
-
+plt.gca().set_yscale('linear')
+plt.savefig("NZvsWorldLinear.png")
 
 plt.figure()
 delta = t.diff()
@@ -41,7 +42,7 @@ delta = delta.rolling(7).sum()
 
 
 for country in t:
-    plt.loglog(t[country], delta[country], alpha=0.2)
+    plt.loglog(t[country], delta[country], alpha=0.3)
 plt.loglog(t[nz], delta[nz], color='k', linewidth=2)
 plt.title("Rate of Growth")
 plt.ylabel("New Cases")
@@ -54,7 +55,7 @@ plt.figure()
 for country in t:
     d_tmp = np.array(t[country])
     to_plot = d_tmp[d_tmp >= 10]
-    plt.semilogy(to_plot, alpha=0.2)
+    plt.semilogy(to_plot, alpha=0.3)
     if country == nz:
         plt.semilogy(to_plot, color='k', linewidth=2)
 plt.title("Comparative Rate of Growth")
