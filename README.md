@@ -12,31 +12,35 @@ Disclaimer - The following investigation is not fitted to the data, but is loose
 
 The Susceptible, Infected, Recovered, Dead (SIRD) model is simply a set of differential equations specifying the rate of infection and recovery in terms of the population in each of these stages of the disease, and some coefficients.
 
-Let $s, i, r, d$ be the susceptible, infected, recovered, and dead fraction of the population, i.e, they are a number from 0 to 1, where 1 represents the entire population. The SIRD model is then based on the set of equations:
+Let $$s, i, r, d$$ be the susceptible, infected, recovered, and dead fraction of the population, i.e, they are a number from 0 to 1, where 1 represents the entire population. The SIRD model is then based on the set of equations:
 
 #### Decay of the Susceptible
+
 $$ \frac{\text{d}s}{\text{d}t} = - \beta s(t) i(t) $$
 
-The susceptible become infected at a rate proportional to the product of the susceptible fraction, and the infected fraction: if $i = 0$ or $s = 0$, then there is no infection, and the larger $s$ or $i$ is, the more likely infection is to occur. This is scaled by $\beta$, which is a parameter governed by how easily transmissible the virus is, and (hopefully) effected by things like lockdown.
+The susceptible become infected at a rate proportional to the product of the susceptible fraction, and the infected fraction: if $$i = 0$$ or $$s = 0$$, then there is no infection, and the larger $$s$$ or $$i$$ is, the more likely infection is to occur. This is scaled by$$\beta$, which is a parameter governed by how easily transmissible the virus is, and (hopefully) effected by things like lockdown.
 
 
 #### Growth of the Infected, and decay - recovery or death
+
 $$ \frac{\text{d}i}{\text{d}t} = + \beta s(t) i(t) - \gamma i(t) - \delta i(t) $$
 
-The infected population increased due to the process described above, and decreases as infected people either recover (at a rate $\gamma$) or die (at rate $\delta$).
+The infected population increased due to the process described above, and decreases as infected people either recover (at a rate$$\gamma$$) or die (at rate$$\delta$$).
 
-The parameter $\gamma$ is approximimately the inverse of the recovery time. People have estimated the recovery time from COVID-19 to be anywhere between 2 and 30 days, which isn't very useful, but most reports are around the two week mark, so for this model, we take $\gamma = 1/14$.
+The parameter$$\gamma$$ is approximimately the inverse of the recovery time. People have estimated the recovery time from COVID-19 to be anywhere between 2 and 30 days, which isn't very useful, but most reports are around the two week mark, so for this model, we take$$\gamma = 1/14$$.
 
-The mortality rate (fraction of fatal infections) governs $\delta$. The mortality rate is extremely hard to estimate, as one must know both the number of fatalities from the disease (which is generally easy to measure), and the total number of cases, which is much harder to measure. Not all infected people are tested, and are therefore not counted as having the disease. This is a mechanism by which is is easy to *overestimate* the mortality rate of the infection. The mortality rate is of course strongly effected by availble medical care. Testing lots and testing early has two advantages:
+The mortality rate (fraction of fatal infections) governs$$\delta$. The mortality rate is extremely hard to estimate, as one must know both the number of fatalities from the disease (which is generally easy to measure), and the total number of cases, which is much harder to measure. Not all infected people are tested, and are therefore not counted as having the disease. This is a mechanism by which is is easy to *overestimate* the mortality rate of the infection. The mortality rate is of course strongly effected by availble medical care. Testing lots and testing early has two advantages:
  - You can prepare
-   - by quarantining people who have no/little symptoms but can infect others to reduce overall infected population (reducing the $\beta$ parameter)
+   - by quarantining people who have no/little symptoms but can infect others to reduce overall infected population (reducing the$$\beta$ parameter)
    - get your medical care systems ready to deal with the symptomatic cases where it is needed resulting in (hopefully) fewer deaths.
  - Your country gets the benefit of reporting a low mortality rate, because you have have a better (larger) idea of how many people actually have the disease.
  
 The former is of course much less important for your population, but is interesting for the purpose of getting the best handle on the data.
 
 #### Recovery and Death
+
 $$ \frac{\text{d}r}{\text{d}t} = + \gamma i(t) $$
+
 $$ \frac{\text{d}d}{\text{d}t} = + \delta i(t) $$
 
 The recovered and dead population increases as described above.
@@ -51,15 +55,20 @@ is known as the basic reproduction number (or ratio). It can be interpreted as t
 
 The other interesting parameters to extract are:
  - the time between contacts (infection transmissions)
+ 
  $$ T_c = \frac{1}{\beta}, $$
+ 
  - the time recovery time as discussed above,
+ 
  $$ T_r = \frac{1}{\gamma} $$
+ 
  - and the mortality rate
+ 
  $$ m = \frac{\text{Number of deaths}}{\text{Number of infections}} = \frac{\delta}{\gamma} $$
 
 #### Results
 
-The plot below shows a typical outcome for letting the simulation run, assuming a tenth of a billion of the population starts with the disease, each person infects 2.5 other people ($R_0 = 2.5$), they are infected for 14 days ($\gamma = 1/14$), and 2.5% of people who become infected die $$ \delta = 0.025 \times \gamma $$.
+The plot below shows a typical outcome for letting the simulation run, assuming a tenth of a billion of the population starts with the disease, each person infects 2.5 other people ($$R_0 = 2.5$$), they are infected for 14 days ($$\gamma = 1/14$$), and 2.5% of people who become infected die $$ \delta = 0.025 \times \gamma$$.
 
 ![Single SIRD run](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/Simulations/SingleRun.png)
 
