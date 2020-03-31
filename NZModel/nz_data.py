@@ -3,6 +3,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
+
 #filename = "covid-19-confirmed-cases-28mar20.xlsx"
 #date_column = "Report Date"
 #header = 3
@@ -75,7 +78,9 @@ plt.ylabel("Total Cases")
 plt.title("NZ COIVD-19 Cases")
 plt.legend(["Total Cases", "Suspected Cases"])
 plt.savefig("NZCases.png")
+
 plt.gca().set_yscale('log')
+plt.title("NZ COIVD-19 Cases - Log Scale")
 plt.savefig("NZCasesLog.png")
 
 plt.figure()
@@ -112,10 +117,10 @@ for DHB in DHBs:
     series = pi[:, DHB].cumsum() / pop * 1e6
     ax = series.plot(label=DHB, alpha=0.8)
     line= ax.lines[-1]
-    plt.text(line._x[-1] + np.random.rand()*8, series[-1], DHB, color=line.get_color(), alpha=0.8)
+    plt.text(line._x[-1] + np.random.rand()*6, series[-1], DHB, color=line.get_color(), alpha=0.8)
     
 x = plt.xlim()
-plt.xlim((x[0], x[1] + 10))
+plt.xlim((x[0], x[1] + 15))
 plt.ylabel("Reported Cases per Capita [ppm]")
 plt.title("Cases by DHB")
 plt.savefig("NZByDHBPerCap.png")
