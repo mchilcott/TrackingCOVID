@@ -38,34 +38,42 @@ plt.figure()
 #d = rates_total.index.values # For Numpy
 #plt.fill_between(d, rates_total, alpha=0.5, color='c')
 
-rates.plot(style = 'b-')
-d = rates.index.values # For Numpy
-plt.fill_between(d, rates, alpha=0.3, color='b')
+d = rates_total.index.values # For Numpy
+plt.bar(d, rates_total)
+
+d = rates_sus.index.values # For Numpy
+plt.bar(d, rates_sus)
+
+
+plt.legend(["Confirmed Cases", "Suspected Cases"])
+
+
+#rates.plot.bar()
+#rates_sus.plot.bar()
 
 plt.xlabel("Date")
 plt.ylabel("Cases per day")
 plt.title("NZ COIVD-19 Cases")
-#plt.legend(["Total Cases", "Confirmed Cases"])
 
 plt.savefig("NZCasesPerDay.png")
 
 plt.figure()
 
-rc = rates.cumsum()
+rc_sus = rates_sus.cumsum()
 rc_total = rates_total.cumsum()
 
-rc_total.plot(style = 'c-')
+rc_total.plot(style = '.-')
 d = rc_total.index.values # For Numpy
-plt.fill_between(d, rc_total, alpha=0.5, color='c')
+plt.fill_between(d, rc_total, alpha=0.5)
 
-rc.plot(style = 'b-')
-d = rc.index.values # For Numpy
-plt.fill_between(d, rc, alpha=0.5, color='b')
+rc_sus.plot(style = '.-')
+d = rc_sus.index.values # For Numpy
+plt.fill_between(d, rc_sus, alpha=0.5)
 
 plt.xlabel("Date")
 plt.ylabel("Total Cases")
 plt.title("NZ COIVD-19 Cases")
-plt.legend(["Total Cases", "Confirmed Cases"])
+plt.legend(["Total Cases", "Suspected Cases"])
 plt.savefig("NZCases.png")
 plt.gca().set_yscale('log')
 plt.savefig("NZCasesLog.png")
