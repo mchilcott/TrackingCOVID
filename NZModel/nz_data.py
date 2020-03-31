@@ -7,12 +7,16 @@ import matplotlib.pyplot as plt
 #date_column = "Report Date"
 #header = 3
 #filename = "covid-19-confirmed-probable-cases-29mar20.xlsx"
-#date_column = "Date of report"
+#date_column = date_column_sus = "Date of report"
 #header=0
-filename = "covid-cases-30_mar_2020.xlsx"
-date_column = "Report Date"
-date_column_sus = "ReportDate"
+#filename = "covid-cases-30_mar_2020.xlsx"
+#date_column = "Report Date"
+#date_column_sus = "ReportDate"
+#header=3
+filename = "covidcase_list_31_mar_2020_for_web_-_updated.xlsx"
+date_column = date_column_sus = "Date of report"
 header=3
+
 
 data = pd.read_excel(filename, header=header)
 
