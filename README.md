@@ -107,11 +107,11 @@ And taking into account how many people are actually serviced by that District H
 ![NZ's Total Cases, By DHB Per Capita](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/NZByDHBPerCap.png)
 
 ### NZ vs The World
-In each of these graphs, New Zealand's state is shown in black. (GO THE ALL BLACKS! Oh wait... no sport in a lock-down.)
+In each of these graphs, New Zealand's state is shown in black. (GO THE ALL BLACKS! Oh wait... no sport in a lock-down.) For comparason, the other countries in vivid colours are: China in red, US in green, UK in blue, and Australia in yellow.
 
 ![International Cases, Log Scale](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/International/NZvsWorld.png)
 
-Note that this is a log scale, so that we can see what's going on. On a linear plot, we see the small scale of our infection compared to the rest of the world. China is the early riser, and then the US, Italy and Spain surpass their reported case number, with the US in the lead for case number, and still sky-rocketing.
+Note that this is a log scale, so that we can see what's going on. On a linear plot, we see the small scale of our infection compared to the rest of the world. China is the early riser, and then the US, Italy and Spain surpass China's reported case number, with the US currently in the lead for case number, and still sky-rocketing.
 
 ![International Cases, from 10 cases](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/International/NZvsWorldLinear.png)
 

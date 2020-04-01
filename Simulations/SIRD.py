@@ -111,7 +111,7 @@ def small_bubbles():
     for i in range(len(num_in_bubble)):
         # reset colours
         plt.gca().set_prop_cycle(None)
-        plt.plot(t, y_lots[i], alpha = 0.1)
+        plt.plot(t, y_lots[i], alpha = 0.3)
 
     # Overlay it on top again. Need it at the start to get the legend right
     plt.gca().set_prop_cycle(None)
