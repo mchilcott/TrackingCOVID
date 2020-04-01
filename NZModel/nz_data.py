@@ -16,9 +16,11 @@ register_matplotlib_converters()
 #date_column = "Report Date"
 #date_column_sus = "ReportDate"
 #header=3
-filename = "covidcase_list_31_mar_2020_for_web_-_updated.xlsx"
+#filename = "covidcase_list_31_mar_2020_for_web_-_updated.xlsx"
 date_column = date_column_sus = "Date of report"
 header=3
+
+filename = "covidcase_list_1_apr_2020.xlsx"
 
 
 data = pd.read_excel(filename, header=header)
