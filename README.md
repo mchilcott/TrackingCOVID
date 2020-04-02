@@ -114,7 +114,7 @@ We can also look at the relationship between age, sex and DHB region of the infe
 
 ![Cases in Age group by Sex](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/AgeSex.png)
 
-![Cases by Sex](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/Sex.png)
+![Cases by Sex](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/Pies.png)
 
 
 

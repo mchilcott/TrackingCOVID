@@ -171,7 +171,7 @@ groups[2] = groups[1]
 groups[1] = groups[0]
 groups[0] = t
 
-cmap = cm.get_cmap('viridis')
+cmap = cm.get_cmap('rainbow')
 
 plt.gca().set_prop_cycle(color=cmap(np.linspace(0,1,len(groups))))
 
@@ -240,17 +240,29 @@ plt.xlabel("Cases")
 plt.tight_layout(rect=(0,0,0.85,1))
 plt.savefig("AgeSex.png")
 
+###################################################################
+#   Pie Breakdowns
+###################################################################
+plt.figure(figsize=(8,4))
 
-plt.figure()
-
+plt.subplot(1,2,1)
+plt.title("Sex")
 cmap = cm.get_cmap('Set2')
 plt.gca().set_prop_cycle(color=[cmap(5), cmap(2), cmap(1)])
 
 tb1 = data.pivot_table(values="Count", index = ["Sex"], aggfunc="count")
 pi1 = tb1["Count"]
-
-
 plt.pie(pi1.values, labels=pi1.index.values, autopct='%1.1f%%')
 plt.gca().set_aspect("equal")
-plt.savefig("Sex.png")
+
+plt.subplot(1,2,2)
+cmap = cm.get_cmap('Set2')
+plt.gca().set_prop_cycle(color=cmap(np.arange(5)))
+plt.title("International Travel")
+data["International travel"] = data["International travel"].fillna("Unspecified")
+pi = data.pivot_table(values="Count", index = ["International travel"], aggfunc="count")["Count"]
+plt.pie(pi.values, labels=pi.index.values, autopct='%1.1f%%',)
+plt.gca().set_aspect("equal")
+
+plt.savefig("Pies.png")
 plt.show()
