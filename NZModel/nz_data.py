@@ -2,9 +2,14 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
+
+###################################################################
+#   Data files
+###################################################################
 
 #filename = "covid-19-confirmed-cases-28mar20.xlsx"
 #date_column = "Report Date"
@@ -17,11 +22,11 @@ register_matplotlib_converters()
 #date_column_sus = "ReportDate"
 #header=3
 #filename = "covidcase_list_31_mar_2020_for_web_-_updated.xlsx"
+
 date_column = date_column_sus = "Date of report"
 header=3
-
-filename = "covidcase_list_1_apr_2020.xlsx"
-
+#filename = "covidcase_list_1_apr_2020.xlsx"
+filename = "covid-19_case_list_2_april_2020.xlsx"
 
 data = pd.read_excel(filename, header=header)
 
@@ -36,8 +41,12 @@ rates_sus = data_sus[date_column_sus].value_counts().sort_index()
 
 rates_total = rates_sus.add(rates, fill_value = 0)
 
-plt.figure()
 
+###################################################################
+#   New Cases daily
+###################################################################
+
+plt.figure()
 
 #rates_total.plot(style = 'c-')
 #d = rates_total.index.values # For Numpy
@@ -57,11 +66,14 @@ plt.legend(["Confirmed Cases", "Suspected Cases"])
 #rates_sus.plot.bar()
 
 plt.xlabel("Date")
-plt.ylabel("Cases per day")
+plt.ylabel("New Cases per day")
 plt.title("NZ COIVD-19 Cases")
 
 plt.savefig("NZCasesPerDay.png")
 
+###################################################################
+#   Total Cases 
+###################################################################
 plt.figure()
 
 rc_sus = rates_sus.cumsum()
@@ -84,6 +96,11 @@ plt.savefig("NZCases.png")
 plt.gca().set_yscale('log')
 plt.title("NZ COIVD-19 Cases - Log Scale")
 plt.savefig("NZCasesLog.png")
+
+
+###################################################################
+#   DHB Breakdown
+###################################################################
 
 plt.figure()
 
@@ -109,13 +126,18 @@ plt.ylabel("Total Reported Cases")
 plt.title("Cases by DHB")
 plt.savefig("NZByDHB.png")
 
+
+###################################################################
+#   DHB Per Capita
+###################################################################
+
 plt.figure()
 
 dhb_file = "DHBPopulations.xlsx"
 dhb_data = pd.read_excel(dhb_file, header=None, names=["DHB", "Population"], usecols=[0,2], skiprows=7, skipfooter=1)
 
 for DHB in DHBs:
-    pop = dhb_data["Population"].where(dhb_data['DHB'] == DHB).sum()
+    pop = dhb_data["Population"].where(dhb_data['DHB'] == DHB).sum() # Should only be one element anyway
     series = pi[:, DHB].cumsum() / pop * 1e6
     ax = series.plot(label=DHB, alpha=0.8)
     line= ax.lines[-1]
@@ -127,4 +149,108 @@ plt.ylabel("Reported Cases per Capita [ppm]")
 plt.title("Cases by DHB")
 plt.savefig("NZByDHBPerCap.png")
 
+
+###################################################################
+#   Age Breakdown - DHB
+###################################################################
+
+plt.figure(figsize=(8,4))
+
+tb1 = data.pivot_table(values="Count", index = ["DHB", "Age group"], aggfunc="count")
+pi1 = tb1["Count"]
+
+DHBs = pi1.index.levels[0]
+
+running_totals = np.zeros((len(DHBs)))
+
+groups = list(pi1.index.levels[1])
+
+# Fix the <1 problem in a really bad way. I'm tired
+t = groups[2]
+groups[2] = groups[1]
+groups[1] = groups[0]
+groups[0] = t
+
+cmap = cm.get_cmap('viridis')
+
+plt.gca().set_prop_cycle(color=cmap(np.linspace(0,1,len(groups))))
+
+for age_group in groups:
+                          
+    series = pi1[:, age_group]
+                          
+    d = np.array([DHBs.get_loc(x) for x in series.index.values]) # For Numpy
+    y = series.values
+    plt.barh(-d, y, left=running_totals[d], label=age_group)
+    
+    running_totals[d] += y
+
+
+plt.title("Area breakdown by Age")
+plt.ylabel("DHB")
+plt.xlabel("Cases")
+plt.yticks(-1 * np.arange(len(DHBs)))
+plt.gca().set_yticklabels(DHBs)
+plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+plt.tight_layout(rect=(0,0,0.85,1))
+
+plt.savefig("AgeDHB.png")
+
+###################################################################
+#   Age Breakdown - Gender
+###################################################################
+plt.figure(figsize=(8,3))
+tb1 = data.pivot_table(values="Count", index = ["Age group", "Sex"], aggfunc="count")
+pi1 = tb1["Count"]
+
+groups = list(pi1.index.levels[0])
+
+sexes =  list(pi1.index.levels[1])
+
+running_totals = np.zeros((len(groups)))
+
+# Fix the <1 problem in a really bad way. I'm tired
+t = groups[2]
+groups[2] = groups[1]
+groups[1] = groups[0]
+groups[0] = t
+
+cmap = cm.get_cmap('Set2')
+plt.gca().set_prop_cycle(color=[cmap(5), cmap(2), cmap(1)])
+
+for sex in sexes:
+                          
+    series = pi1[:, sex]
+                          
+    d = np.array([groups.index(x) for x in series.index.values]) # For Numpy
+    y = series.values
+    plt.barh(-d, y, left=running_totals[d], label=sex)
+    
+    running_totals[d] += y
+
+
+plt.yticks(-1 * np.arange(len(groups)))
+plt.gca().set_yticklabels(groups)
+plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+
+plt.title("Age breakdown by Sex")
+plt.ylabel("Age Group")
+plt.xlabel("Cases")
+
+plt.tight_layout(rect=(0,0,0.85,1))
+plt.savefig("AgeSex.png")
+
+
+plt.figure()
+
+cmap = cm.get_cmap('Set2')
+plt.gca().set_prop_cycle(color=[cmap(5), cmap(2), cmap(1)])
+
+tb1 = data.pivot_table(values="Count", index = ["Sex"], aggfunc="count")
+pi1 = tb1["Count"]
+
+
+plt.pie(pi1.values, labels=pi1.index.values, autopct='%1.1f%%')
+plt.gca().set_aspect("equal")
+plt.savefig("Sex.png")
 plt.show()

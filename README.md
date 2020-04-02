@@ -106,6 +106,18 @@ Especially, consider this split up by District Health Board.
 And taking into account how many people are actually serviced by that District Health Board, we see that the Southern district has an unfair share of the number of cases.
 ![NZ's Total Cases, By DHB Per Capita](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/NZByDHBPerCap.png)
 
+#### Demographics
+
+We can also look at the relationship between age, sex and DHB region of the infected.
+
+![Cases in DHB by Age](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/AgeDHB.png)
+
+![Cases in Age group by Sex](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/AgeSex.png)
+
+![Cases by Sex](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/Sex.png)
+
+
+
 ### NZ vs The World
 In each of these graphs, New Zealand's state is shown in black. (GO THE ALL BLACKS! Oh wait... no sport in a lock-down.) For comparason, the other countries in vivid colours are: China in red, US in green, UK in blue, and Australia in yellow.
 
