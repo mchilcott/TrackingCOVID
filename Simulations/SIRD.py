@@ -16,7 +16,7 @@ def do_sird(
     beta = infetion_rate / recovery_time,
     gamma = 1.0/recovery_time,
     delta = death_rate / recovery_time,
-    y0=[1.0, 1e-7, 0, 0], t_max = 400):
+    y0=[1.0, 1e-7, 0, 0], t_max = 400, t_points = 2000):
 
     def sird_dot (y, t):
         [s, i, r, d] = y
@@ -30,7 +30,7 @@ def do_sird(
         return dydt
 
 
-    t = np.linspace(0,t_max, 2000)
+    t = np.linspace(0,t_max, t_points)
     y = scipy.integrate.odeint(sird_dot, y0, t)
     
     return t,y

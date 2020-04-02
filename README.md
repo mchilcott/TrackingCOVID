@@ -116,6 +116,16 @@ We can also look at the relationship between age, sex and DHB region of the infe
 
 ![Cases by Sex](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/Pies.png)
 
+#### Simulations
+
+We can fit the data collected to the "infected" part of the SIRD model we discussed above. For the following calculation, I have assumed the the death rate is zero, and used the parameters I discussed above as the starting point for the curve fit. Please note that the follow graph:
+ - Assumes that $$\beta$$ and $$\gamma$$ are constant - this should be vastly changed by the lockdown
+ - Assumes that the entire population of NZ is accessible to the virus. Hopefully this is not the case in the lockdown.
+ - Shows that when the govenment keeps saying that what happens in the next 10 days will be interesting, that they're right
+
+![Cases by Sex](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/NZSIRDFit.png)
+
+We're doing a lot to attempt to prevent the above explosion of cases from happening.
 
 
 ### NZ vs The World
