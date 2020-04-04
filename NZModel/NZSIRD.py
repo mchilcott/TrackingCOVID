@@ -41,10 +41,10 @@ print("Reproduction Number = %f, (%f, %f)" % (np.mean(reproduction_tests), np.pe
 print("Recovery Time = %f, (%f, %f)" % (np.mean(recovery_tests), np.percentile(recovery_tests, 2.5), np.percentile(recovery_tests, 97.5)))
 
 for row in popt:
-    t, y = do_sird(row[0], row[1], 0, [1, init_i, 0, 0], max_days * 1.5)
+    t, y = do_sird(row[0], row[1], 0, [1, init_i, 0, 0], max_days * 1.2)
     plt.plot(t, y[:,1], 'k', alpha=0.1)
 
-t, y = do_sird(mean[0], mean[1], 0, [1, init_i, 0, 0], max_days * 1.5)
+t, y = do_sird(mean[0], mean[1], 0, [1, init_i, 0, 0], max_days * 1.2)
 plt.plot(t, y[:,1], 'k')
 
 plt.plot(day, rc_total/nz_population, 'o')

@@ -27,7 +27,8 @@ date_column = date_column_sus = "Date of report"
 header=3
 #filename = "covidcase_list_1_apr_2020.xlsx"
 #filename = "./covid-19_case_list_2_april_2020.xlsx"
-filename = "./covid-19-case-details-update-3-april-2020.xlsx"
+#filename = "./covid-19-case-details-update-3-april-2020.xlsx"
+filename = "./covid-19-case-details-update-4-april-2020.xlsx"
 
 # Confirmed Infection Cases
 data_conf = pd.read_excel(filename, header=header)
