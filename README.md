@@ -89,6 +89,8 @@ The latter has a large number of cases of infection, and subsequently deaths, so
 
 Moving away from the simulations, we can take a look at some real data. Firstly, let's look at some summary statistics of New Zealand's data. Note that the numbers for the last day on these plots represent a less than 24 hour period, and are hence not representative.
 
+Also note that my new cases plot doesn't match the numbers reported by the Ministry of Health (MoH). These graphs are generated from the report data provided, but the MoH back-dates some of these cases, so they show up on the back-date on the following plot, but not in the MoH's totals.
+
 #### New Cases
 
 ![NZ's new cases per day](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/NZCasesPerDay.png)
@@ -114,7 +116,11 @@ We can also look at the relationship between age, sex and DHB region of the infe
 
 ![Cases in Age group by Sex](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/AgeSex.png)
 
-![Cases by Sex](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/Pies.png)
+![Cases by Sex, Travel](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/Pies.png)
+
+For those cases that have involved international travel, we can also see the sources we may have imported COVID-19 from.
+
+![Cases by Country, Imported](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/NZModel/ImportedCases.png)
 
 #### Simulations
 

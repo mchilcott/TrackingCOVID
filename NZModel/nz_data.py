@@ -29,6 +29,7 @@ header=3
 #filename = "./covid-19_case_list_2_april_2020.xlsx"
 #filename = "./covid-19-case-details-update-3-april-2020.xlsx"
 filename = "./covid-19-case-details-update-4-april-2020.xlsx"
+#filename = "./covid-casedetialsupdate-5april.xlsx"
 
 # Confirmed Infection Cases
 data_conf = pd.read_excel(filename, header=header)
@@ -44,7 +45,7 @@ rates = rates.sort_index()
 rates_sus = data_sus[date_column_sus].value_counts().sort_index()
 
 # Total = Confirmed + Suspected
-rates_total = rates_sus.add(rates, fill_value = 0)
+rates_total = rates.add(rates_sus, fill_value = 0)
 
 # Concatenate all data for summary statistics
 data = data_conf.append(data_sus, sort=True)
@@ -274,12 +275,23 @@ def plot_demographics():
     plt.gca().set_aspect("equal")
 
     plt.savefig("Pies.png")
+    
+    ###################################################################
+    #   Imports
+    ###################################################################
+    
+    plt.figure()
+    pi = data.pivot_table(values="Count", index = ["Last country before return"], aggfunc="count")["Count"]
+    pi.plot.barh()
+    plt.title("Last Contry Before Return")
+    plt.tight_layout()
+    plt.savefig("ImportedCases.png")
 
 
 if __name__ == "__main__":
-    plot_new()
-    plot_total()
-    plot_dhb()
+    #plot_new()
+    #plot_total()
+    #plot_dhb()
     plot_demographics()
 
     plt.show()
