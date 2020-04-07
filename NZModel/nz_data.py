@@ -291,9 +291,9 @@ def plot_demographics():
 
 
 if __name__ == "__main__":
-    #plot_new()
-    #plot_total()
-    #plot_dhb()
+    plot_new()
+    plot_total()
+    plot_dhb()
     plot_demographics()
 
     plt.show()
