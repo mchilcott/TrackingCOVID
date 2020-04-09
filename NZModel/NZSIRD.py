@@ -31,7 +31,7 @@ def curve(x, beta, gamma):
 
     return np.interp(x, t, y[:, 1])
 
-mean, low, high, std, popt = monte_carlo_fit({'f': curve, 'p0': [2.5/14, 1.0/14]}, day, rc_total_prop)
+mean, low, high, std, popt = monte_carlo_fit({'f': curve, 'p0': [2.0/14, 1.0/14]}, day, rc_total_prop)
 
 reproduction_tests = popt[:,0] / popt[:,1]
 
