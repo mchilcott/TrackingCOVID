@@ -66,15 +66,7 @@ The other interesting parameters to extract are:
  
  $$ m = \frac{\text{Number of deaths}}{\text{Number of infections}} = \frac{\delta}{\gamma} $$
 
-#### Model Behaviour
 
-In terms of the properties defined above, we can explore some predictions of the SIRD model. In the figure below, we look at:
- - The peak infected population - the maximum fraction of the population to infected at the same time.
- - The total infected population - the total fraction of the population that has been infected at some time.
- - The duration of the outbreak, defined as the amount of time spent with the number of people currently infected, greater than half of the peak as described above. (The Full-Width Half-Maximum or FWHM width of the infection peak)
-
-![Behaviours of the SIRD model](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/Simulations/ModelProperties.png)
- 
 #### Results
 
 The plot below shows a typical outcome for letting the simulation run, assuming a tenth of a billion of the population starts with the disease, each person infects 2.5 other people ($$R_0 = 2.5$$), they are infected for 14 days ($$\gamma = 1/14$$), and 2.5% of people who become infected die ($$ \delta = 0.025 \gamma$$).
@@ -85,6 +77,17 @@ If we allow for a 10% standard deviation for each of the infection parameters, a
 
 ![Monte-Carlo SIRD run](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/Simulations/MCSIRD.png)
 
+#### Model Behaviour
+
+In terms of the properties defined above, we can explore some predictions of the SIRD model. In the figure below, we look at:
+ - The peak infected population - the maximum fraction of the population to infected at the same time.
+ - The total infected population - the total fraction of the population that has been infected at some time.
+ - The duration of the outbreak, defined as the amount of time spent with the number of people currently infected, greater than half of the peak as described above. (The Full-Width Half-Maximum or FWHM width of the infection peak)
+
+![Behaviours of the SIRD model](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/Simulations/ModelProperties.png)
+
+#### Lock-down Bubbles
+
 Consider also, that during a lock down, we are kept in small groups or "bubbles", who are each in close contact inside the group, but the groups are isolated from each other. To reduce the time we need to be locked down, we need the virus to die off quickly. This means:
  - Zero transmission and let people recover, or
  - Quick transmission so that the virus is unable to spread quickly, because most people have it. (Herd immunity)
@@ -92,8 +95,6 @@ Consider also, that during a lock down, we are kept in small groups or "bubbles"
 The latter has a large number of cases of infection, and subsequently deaths, so let's not do this to the entire population. Locking down hopefully (nearly) eliminates transmission between our bubbles. The somewhat controversial part - we then also kinda want fast transmission inside the bubble - ideally, we want to isolate any sick people, but if people sharing a bubble are going to get it anyway, the sooner the better so bubbles recover (and become no longer infectious to the larger population) faster. A quick look at this process, only taking into account the fact that a sick member of a bubble means a larger starting fraction of the virus can be seen in the following figure. The bold line is for a bubble of four people.
 
 ![Bubble SIRD run](https://raw.githubusercontent.com/mchilcott/TrackingCOVID19/master/Simulations/SmallBubble.png)
-
-
 
 ### The New Zealand Situation
 
