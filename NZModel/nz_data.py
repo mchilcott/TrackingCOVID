@@ -34,7 +34,8 @@ header=3
 #filename = "covid-casedetails-8april2020.xlsx"
 #filename = "covid-casedetails-9april2020.xlsx"
 #filename = "covid-casedetails-10april2020.xlsx"
-filename = "case-list-11-april-2020-for-web.xlsx"
+#filename = "case-list-11-april-2020-for-web.xlsx"
+filename = "case-list-12-april-2020-for-web.xlsx"
 
 # Confirmed Infection Cases
 data_conf = pd.read_excel(filename, header=header)
