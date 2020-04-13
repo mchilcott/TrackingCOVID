@@ -35,7 +35,8 @@ header=3
 #filename = "covid-casedetails-9april2020.xlsx"
 #filename = "covid-casedetails-10april2020.xlsx"
 #filename = "case-list-11-april-2020-for-web.xlsx"
-filename = "case-list-12-april-2020-for-web.xlsx"
+#filename = "case-list-12-april-2020-for-web.xlsx"
+filename = "covid-case-list-13april2020.xlsx"
 
 # Confirmed Infection Cases
 data_conf = pd.read_excel(filename, header=header)
@@ -85,6 +86,9 @@ def plot_new():
     plt.xlabel("Date")
     plt.ylabel("New Cases per day")
     plt.title("NZ COIVD-19 Cases")
+    
+    plt.xticks(rotation=20)
+    plt.tight_layout()
 
     plt.savefig("NZCasesPerDay.png")
 
