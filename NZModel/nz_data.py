@@ -39,7 +39,8 @@ header=3
 #filename = "covid-case-list-13april2020.xlsx"
 #filename = "covid-caselist-14april.xlsx"
 #filename = "covidcase_list_15_april_2020.xlsx"
-filename = "covid-case_list-16-april.xlsx"
+#filename = "covid-case_list-16-april.xlsx"
+filename = "covid-19-case-list-17-april-2020.xlsx"
 
 # Confirmed Infection Cases
 data_conf = pd.read_excel(filename, header=header)
@@ -278,12 +279,14 @@ def plot_demographics():
     plt.pie(pi1.values, labels=pi1.index.values, autopct='%1.1f%%')
     plt.gca().set_aspect("equal")
 
+
+    travel = "Overseas travel"
     plt.subplot(1,2,2)
     cmap = cm.get_cmap('Set2')
     plt.gca().set_prop_cycle(color=cmap(np.arange(5)))
-    plt.title("International Travel")
-    data["International travel"] = data["International travel"].fillna("Unspecified")
-    pi = data.pivot_table(values="Count", index = ["International travel"], aggfunc="count")["Count"]
+    plt.title("Overseas Travel")
+    data[travel] = data[travel].fillna("Unspecified")
+    pi = data.pivot_table(values="Count", index = [travel], aggfunc="count")["Count"]
     plt.pie(pi.values, labels=pi.index.values, autopct='%1.1f%%',)
     plt.gca().set_aspect("equal")
 
