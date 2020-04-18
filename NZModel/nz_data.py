@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+import re
 
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
@@ -129,10 +130,8 @@ def plot_total():
 #   DHB Breakdown
 ###################################################################
 def plot_dhb():
+    
     plt.figure()
-
-
-
     tb = data.pivot_table(values="Count", index = [date_column,"DHB"], aggfunc="count")
     pi = tb['Count']
 
@@ -181,6 +180,20 @@ def plot_demographics():
 
     plt.figure(figsize=(8,4))
 
+    def reformat_age_range(label):
+        label = label.strip()
+
+        if label[0] == '<':
+            return '00 to %02d' % int(label[1:])
+        elif label[-1] == '+':
+            return str(int(label[:-1])) + '+'
+        else:
+            x = [int(x) for x in label.split(' to ')]
+            return "%02d to %02d" % (x[0], x[1])
+        
+    # Clean up ages
+    data["Age group"] = data["Age group"].map(reformat_age_range)
+    
     tb1 = data.pivot_table(values="Count", index = ["DHB", "Age group"], aggfunc="count")
     pi1 = tb1["Count"]
 
@@ -189,12 +202,6 @@ def plot_demographics():
     running_totals = np.zeros((len(DHBs)))
 
     groups = list(pi1.index.levels[1])
-
-    # Fix the <1 problem in a really bad way. I'm tired
-    t = groups[2]
-    groups[2] = groups[1]
-    groups[1] = groups[0]
-    groups[0] = t
 
     cmap = cm.get_cmap('rainbow')
 
@@ -225,6 +232,7 @@ def plot_demographics():
     #   Age Breakdown - Gender
     ###################################################################
     plt.figure(figsize=(8,3))
+
     tb1 = data.pivot_table(values="Count", index = ["Age group", "Sex"], aggfunc="count")
     pi1 = tb1["Count"]
 
@@ -233,12 +241,6 @@ def plot_demographics():
     sexes =  list(pi1.index.levels[1])
 
     running_totals = np.zeros((len(groups)))
-
-    # Fix the <1 problem in a really bad way. I'm tired
-    t = groups[2]
-    groups[2] = groups[1]
-    groups[1] = groups[0]
-    groups[0] = t
 
     cmap = cm.get_cmap('Set2')
     plt.gca().set_prop_cycle(color=[cmap(5), cmap(2), cmap(1)])
@@ -287,7 +289,7 @@ def plot_demographics():
     plt.gca().set_prop_cycle(color=cmap(np.arange(5)))
     plt.title("Overseas Travel")
     data[travel].replace(' ', np.nan, inplace=True)
-    data[travel] = data[travel].fillna("Unspecified")
+    data[travel].fillna("Unspecified", inplace=True)
     pi = data.pivot_table(values="Count", index = [travel], aggfunc="count")["Count"]
     plt.pie(pi.values, labels=pi.index.values, autopct='%1.1f%%',)
     plt.gca().set_aspect("equal")
