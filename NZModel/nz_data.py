@@ -74,8 +74,6 @@ rates_total = rates.add(rates_sus, fill_value = 0)
 # Concatenate all data for summary statistics
 data = data_conf.append(data_sus, sort=True)
 data.sort_index()
-# Add a dummy column for counting
-data.insert(len(data.columns), "Count", [1] * len(data))
 
 ###################################################################
 #   New Cases daily
@@ -143,8 +141,7 @@ def plot_total():
 def plot_dhb():
     
     plt.figure()
-    tb = data.pivot_table(values="Count", index = [date_column,"DHB"], aggfunc="count")
-    pi = tb['Count']
+    pi = data.pivot_table(index = [date_column,"DHB"], aggfunc="size")
 
     DHBs = pi.keys().levels[1]
 
@@ -205,8 +202,7 @@ def plot_demographics():
     # Clean up ages
     data["Age group"] = data["Age group"].map(reformat_age_range)
     
-    tb1 = data.pivot_table(values="Count", index = ["DHB", "Age group"], aggfunc="count")
-    pi1 = tb1["Count"]
+    pi1 = data.pivot_table(index = ["DHB", "Age group"], aggfunc="size")
 
     DHBs = pi1.index.levels[0]
 
@@ -244,8 +240,7 @@ def plot_demographics():
     ###################################################################
     plt.figure(figsize=(8,3))
 
-    tb1 = data.pivot_table(values="Count", index = ["Age group", "Sex"], aggfunc="count")
-    pi1 = tb1["Count"]
+    pi1 = data.pivot_table(index = ["Age group", "Sex"], aggfunc="size")
 
     groups = list(pi1.index.levels[0])
 
@@ -288,8 +283,7 @@ def plot_demographics():
     cmap = cm.get_cmap('Set2')
     plt.gca().set_prop_cycle(color=[cmap(5), cmap(2), cmap(1)])
 
-    tb1 = data.pivot_table(values="Count", index = ["Sex"], aggfunc="count")
-    pi1 = tb1["Count"]
+    pi1 = data.pivot_table(index = ["Sex"], aggfunc="size")
     plt.pie(pi1.values, labels=pi1.index.values, autopct='%1.1f%%')
     plt.gca().set_aspect("equal")
 
@@ -301,7 +295,7 @@ def plot_demographics():
     plt.title("Overseas Travel")
     data[travel].replace(' ', np.nan, inplace=True)
     data[travel].fillna("Unspecified", inplace=True)
-    pi = data.pivot_table(values="Count", index = [travel], aggfunc="count")["Count"]
+    pi = data.pivot_table(index = [travel], aggfunc="size")
     plt.pie(pi.values, labels=pi.index.values, autopct='%1.1f%%',)
     plt.gca().set_aspect("equal")
 
@@ -312,7 +306,7 @@ def plot_demographics():
     ###################################################################
     
     plt.figure()
-    pi = data.pivot_table(values="Count", index = ["Last country before return"], aggfunc="count")["Count"]
+    pi = data.pivot_table(index = ["Last country before return"], aggfunc="size")
     pi.plot.barh()
     plt.title("Last Contry Before Return")
     plt.tight_layout()
