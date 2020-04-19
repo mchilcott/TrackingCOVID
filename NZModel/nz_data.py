@@ -42,13 +42,24 @@ header=3
 #filename = "covidcase_list_15_april_2020.xlsx"
 #filename = "covid-case_list-16-april.xlsx"
 #filename = "covid-19-case-list-17-april-2020.xlsx"
-filename = "web-covid-confprob_20200418-2.xlsx"
+#filename = "web-covid-confprob_20200418-2.xlsx"
+filename = "covid-casedeatails-19april2020.xlsx"
+
+# The data keeps getting worse *sigh*
+def date_decoder(x):
+    # test that we're getting the strings (or array of) that we want
+
+    if isinstance(x, list) and len(x) > 0:
+        if not isinstance(x[0], str) or not isinstance(x[0], unicode):
+            return x
+        
+    return pd.to_datetime(x, format="%d/%m/%Y", exact=False)
 
 # Confirmed Infection Cases
-data_conf = pd.read_excel(filename, header=header)
+data_conf = pd.read_excel(filename, header=header, parse_dates=[date_column], date_parser=date_decoder)
 
 # Suspected Infection Cases
-data_sus = pd.read_excel(filename, header=header, sheet_name=1)
+data_sus = pd.read_excel(filename, header=header, sheet_name=1, parse_dates=[date_column_sus], date_parser=date_decoder)
 
 # infection rates
 rates = data_conf[date_column].value_counts()
