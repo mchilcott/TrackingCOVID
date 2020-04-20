@@ -43,7 +43,8 @@ header=3
 #filename = "covid-case_list-16-april.xlsx"
 #filename = "covid-19-case-list-17-april-2020.xlsx"
 #filename = "web-covid-confprob_20200418-2.xlsx"
-filename = "covid-casedeatails-19april2020.xlsx"
+#filename = "covid-casedeatails-19april2020.xlsx"
+filename = "covid-caselist-20april.xlsx"
 
 # The data keeps getting worse *sigh*
 def date_decoder(x):
@@ -187,6 +188,9 @@ def plot_demographics():
     ###################################################################
 
     plt.figure(figsize=(8,4))
+    age = "Age group"
+    data[age].replace(' ', np.nan, inplace=True)
+    data[age].fillna("Unspecified", inplace=True)
 
     def reformat_age_range(label):
         label = label.strip()
@@ -195,14 +199,16 @@ def plot_demographics():
             return '00 to %02d' % int(label[1:])
         elif label[-1] == '+':
             return str(int(label[:-1])) + '+'
+        elif label == "Unspecified":
+            return label
         else:
             x = [int(x) for x in label.split(' to ')]
             return "%02d to %02d" % (x[0], x[1])
         
     # Clean up ages
-    data["Age group"] = data["Age group"].map(reformat_age_range)
+    data[age] = data[age].map(reformat_age_range)
     
-    pi1 = data.pivot_table(index = ["DHB", "Age group"], aggfunc="size")
+    pi1 = data.pivot_table(index = ["DHB", age], aggfunc="size")
 
     DHBs = pi1.index.levels[0]
 
@@ -239,7 +245,7 @@ def plot_demographics():
     #   Age Breakdown - Gender
     ###################################################################
     plt.figure(figsize=(8,3))
-
+    data["Sex"].fillna("Unspecified", inplace=True)
     pi1 = data.pivot_table(index = ["Age group", "Sex"], aggfunc="size")
 
     groups = list(pi1.index.levels[0])
