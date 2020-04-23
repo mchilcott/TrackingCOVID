@@ -46,7 +46,8 @@ header=3
 #filename = "covid-casedeatails-19april2020.xlsx"
 #filename = "covid-caselist-20april.xlsx"
 #filename = "covid-casedetails-21april_0.xlsx"
-filename = "covid-caselist-22april.xlsx"
+#filename = "covid-caselist-22april.xlsx"
+filename = "covid-caselist-23april.xlsx"
 
 # The data keeps getting worse *sigh*
 def date_decoder(x):
@@ -189,7 +190,7 @@ def plot_demographics():
     #   Age Breakdown - DHB
     ###################################################################
 
-    plt.figure(figsize=(8,4))
+    plt.figure(figsize=(6.4,4))
     age = "Age group"
     data[age].replace(' ', np.nan, inplace=True)
     data[age].fillna("Unspecified", inplace=True)
@@ -239,14 +240,14 @@ def plot_demographics():
     plt.yticks(-1 * np.arange(len(DHBs)))
     plt.gca().set_yticklabels(DHBs)
     plt.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-    plt.tight_layout(rect=(0,0,0.85,1))
+    plt.tight_layout(rect=(0,0,0.8,1))
 
     plt.savefig("AgeDHB.png")
 
     ###################################################################
     #   Age Breakdown - Gender
     ###################################################################
-    plt.figure(figsize=(8,3))
+    plt.figure(figsize=(6.4,3))
     data["Sex"].fillna("Unspecified", inplace=True)
     pi1 = data.pivot_table(index = ["Age group", "Sex"], aggfunc="size")
 
@@ -278,13 +279,13 @@ def plot_demographics():
     plt.ylabel("Age Group")
     plt.xlabel("Cases")
 
-    plt.tight_layout(rect=(0,0,0.85,1))
+    plt.tight_layout(rect=(0,0,0.8,1))
     plt.savefig("AgeSex.png")
 
     ###################################################################
     #   Pie Breakdowns
     ###################################################################
-    plt.figure(figsize=(8,4))
+    plt.figure(figsize=(6.4,4))
 
     plt.subplot(1,2,1)
     plt.title("Sex")
