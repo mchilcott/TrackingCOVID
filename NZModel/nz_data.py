@@ -1,4 +1,3 @@
- 
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -49,7 +48,8 @@ header=3
 #filename = "covid-caselist-22april.xlsx"
 #filename = "covid-caselist-23april.xlsx"
 #filename = "covid-caselist-24april.xlsx"
-filename = "covid-19-case-list-25-april-2020.xlsx"
+#filename = "covid-19-case-list-25-april-2020.xlsx"
+filename = "covid-casedetails-27april2020.xlsx"
 
 # The data keeps getting worse *sigh*
 def date_decoder(x):
@@ -62,10 +62,10 @@ def date_decoder(x):
     return pd.to_datetime(x, format="%d/%m/%Y", exact=False)
 
 # Confirmed Infection Cases
-data_conf = pd.read_excel(filename, header=header, parse_dates=[date_column], date_parser=date_decoder)
+data_conf = pd.read_excel(filename, header=header, parse_dates=[date_column], date_parser=date_decoder, encoding = 'utf8')
 
 # Suspected Infection Cases
-data_sus = pd.read_excel(filename, header=header, sheet_name=1, parse_dates=[date_column_sus], date_parser=date_decoder)
+data_sus = pd.read_excel(filename, header=header, sheet_name=1, parse_dates=[date_column_sus], date_parser=date_decoder, encoding = 'utf8')
 
 # infection rates
 rates = data_conf[date_column].value_counts()
@@ -147,6 +147,7 @@ def plot_total():
 def plot_dhb():
     
     plt.figure()
+    
     pi = data.pivot_table(index = [date_column,"DHB"], aggfunc="size")
 
     DHBs = pi.keys().levels[1]
@@ -171,10 +172,11 @@ def plot_dhb():
     plt.figure()
 
     dhb_file = "DHBPopulations.xlsx"
-    dhb_data = pd.read_excel(dhb_file, header=None, names=["DHB", "Population"], usecols=[0,2], skiprows=7, skipfooter=1)
+    dhb_data = pd.read_excel(dhb_file, header=None, names=["DHB", "Population"], usecols=[0,2], skiprows=7, skipfooter=1, encoding = 'utf8')
 
     for DHB in DHBs:
-        pop = dhb_data["Population"].where(dhb_data['DHB'] == DHB).sum() # Should only be one element anyway
+        filters = dhb_data['DHB'] == DHB;
+        pop = dhb_data["Population"].where(filters).sum() # Should only be one element anyway
         series = pi[:, DHB].cumsum() / pop * 1e6
         ax = series.plot(label=DHB, alpha=0.8)
         line= ax.lines[-1]

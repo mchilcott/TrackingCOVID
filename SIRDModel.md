@@ -1,4 +1,5 @@
- 
+{% include mathjax.html %}
+
 Disclaimer - The following investigation is not fitted to the data, but is loosely based on COVID. This should not be taken too seriously.
 
 The Susceptible, Infected, Recovered, Dead (SIRD) model is simply a set of differential equations specifying the rate of infection and recovery in terms of the population in each of these stages of the disease, and some coefficients.
