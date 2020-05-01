@@ -83,7 +83,7 @@ def plot_new():
 
     plt.xlabel("Date")
     plt.ylabel("New Cases per day")
-    plt.title("NZ COIVD-19 Cases")
+    plt.title("NZ COVID-19 Cases")
     
     plt.xticks(rotation=20)
     plt.tight_layout()
@@ -109,12 +109,12 @@ def plot_total():
 
     plt.xlabel("Date")
     plt.ylabel("Total Cases")
-    plt.title("NZ COIVD-19 Cases")
+    plt.title("NZ COVID-19 Cases")
     plt.legend(["Total Cases", "Suspected Cases"])
     plt.savefig("NZCases.png")
 
     plt.gca().set_yscale('log')
-    plt.title("NZ COIVD-19 Cases - Log Scale")
+    plt.title("NZ COVID-19 Cases - Log Scale")
     plt.savefig("NZCasesLog.png")
 
 
