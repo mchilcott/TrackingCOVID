@@ -26,30 +26,7 @@ register_matplotlib_converters()
 date_column = date_column_sus = "Date of report"
 header=3
 #filename = "covidcase_list_1_apr_2020.xlsx"
-#filename = "./covid-19_case_list_2_april_2020.xlsx"
-#filename = "./covid-19-case-details-update-3-april-2020.xlsx"
-#filename = "./covid-19-case-details-update-4-april-2020.xlsx"
-#filename = "./covid-casedetialsupdate-5april.xlsx"
-#filename = "./covid-casedetails-update-6april.xlsx"
-#filename = "covid-casedetails-8april2020.xlsx"
-#filename = "covid-casedetails-9april2020.xlsx"
-#filename = "covid-casedetails-10april2020.xlsx"
-#filename = "case-list-11-april-2020-for-web.xlsx"
-#filename = "case-list-12-april-2020-for-web.xlsx"
-#filename = "covid-case-list-13april2020.xlsx"
-#filename = "covid-caselist-14april.xlsx"
-#filename = "covidcase_list_15_april_2020.xlsx"
-#filename = "covid-case_list-16-april.xlsx"
-#filename = "covid-19-case-list-17-april-2020.xlsx"
-#filename = "web-covid-confprob_20200418-2.xlsx"
-#filename = "covid-casedeatails-19april2020.xlsx"
-#filename = "covid-caselist-20april.xlsx"
-#filename = "covid-casedetails-21april_0.xlsx"
-#filename = "covid-caselist-22april.xlsx"
-#filename = "covid-caselist-23april.xlsx"
-#filename = "covid-caselist-24april.xlsx"
-#filename = "covid-19-case-list-25-april-2020.xlsx"
-filename = "covid-casedetails-27april2020.xlsx"
+filename = "covid-cases-1may2020_0.xlsx"
 
 # The data keeps getting worse *sigh*
 def date_decoder(x):
@@ -175,7 +152,8 @@ def plot_dhb():
     dhb_data = pd.read_excel(dhb_file, header=None, names=["DHB", "Population"], usecols=[0,2], skiprows=7, skipfooter=1, encoding = 'utf8')
 
     for DHB in DHBs:
-        filters = dhb_data['DHB'] == DHB;
+        # Replace macron a with normal a to make it compatable
+        filters = dhb_data['DHB'] == DHB.replace(u'\u0101', 'a');
         pop = dhb_data["Population"].where(filters).sum() # Should only be one element anyway
         series = pi[:, DHB].cumsum() / pop * 1e6
         ax = series.plot(label=DHB, alpha=0.8)
