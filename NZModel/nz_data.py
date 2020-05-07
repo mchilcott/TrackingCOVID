@@ -23,10 +23,12 @@ register_matplotlib_converters()
 #header=3
 #filename = "covidcase_list_31_mar_2020_for_web_-_updated.xlsx"
 
-date_column = date_column_sus = "Date of report"
+#date_column = date_column_sus = "Date of report"
 header=3
 #filename = "covidcase_list_1_apr_2020.xlsx"
-filename = "covid-cases-5may2020.xlsx"
+date_column = date_column_sus = "Date notified of potential case"
+#filename = "covid-cases-7may20.xlsx"
+filename = "covid-cases-7may20.xlsx"
 
 # The data keeps getting worse *sigh*
 def date_decoder(x):
