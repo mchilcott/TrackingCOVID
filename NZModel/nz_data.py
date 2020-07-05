@@ -28,7 +28,7 @@ header=3
 #filename = "covidcase_list_1_apr_2020.xlsx"
 date_column = date_column_sus = "Date notified of potential case"
 #filename = "covid-cases-7may20.xlsx"
-filename = "covid-cases-22may20.xlsx"
+filename = "covid-cases-5july20.xlsx"
 
 # The data keeps getting worse *sigh*
 def date_decoder(x):
